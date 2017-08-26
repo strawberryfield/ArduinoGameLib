@@ -18,10 +18,10 @@
 // along with CasaSoft Arduino Games.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-#include "GameEngine.h"
+#include "SerpentoneEngine.h"
 #include <bitmaps/CATlogo.h>
 
-GameEngine GE;
+SerpentoneEngine GE;
 
 void setup() {
   // put your setup code here, to run once:

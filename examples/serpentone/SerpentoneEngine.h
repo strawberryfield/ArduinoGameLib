@@ -18,33 +18,22 @@
 // along with CasaSoft Arduino Games.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GAMEENGINE_H
-#define GAMEENGINE_H
+#ifndef SERPENTONEENGINE_H
+#define SERPENTONEENGINE_H
 
 #include <openGLCD.h>
 #include <gameportlib.h>
 #include <fonts/System5x7.h>
-#include "GameUtils.h"
-#include "GameStringInput.h"
-#include "GameMenu.h"
-#include "GameHallOfFame.h"
+#include <GameUtils.h>
+#include <GameHallOfFame.h>
+#include <GameEngine.h>
 
-class GameEngine 
+class SerpentoneEngine : public GameEngine
 {
   public:
-    void Init(char title[]);
-    void Splash(Image_t bitmap, int timeout=2000);
-    void Loop();
-
-  protected:
-    GameMenu  MENU;
-    GameHallOfFame HALL;
+    using GameEngine::GameEngine;
     
-    enum loopStates {loopMenu, loopGame, loopHall, loopName};
-    
-    loopStates loopStatus;
-    bool inGame;
-    
+  protected:	
     virtual void gameStart();
     virtual int gameRun();
 };

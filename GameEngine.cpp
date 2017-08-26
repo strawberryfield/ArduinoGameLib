@@ -56,9 +56,9 @@ void GameEngine::Loop()
       break;
 
     case loopGame:
-      if(!inGame)
-        gameStart();
-      gameRun();
+      gameStart();
+      if(gameRun())
+        loopStatus = loopMenu;
       break;
 
     case loopHall:
@@ -80,6 +80,9 @@ void GameEngine::Loop()
 
 void GameEngine::gameStart()
 {
+  if(inGame)
+	return;
+
   inGame = 1;
   GLCD.ClearScreen();
   GLCD.GotoXY(0, 28);
@@ -87,12 +90,14 @@ void GameEngine::gameStart()
   delay(200);
 }
 
-void GameEngine::gameRun()
+int GameEngine::gameRun()
 {
   if(GU.anyButton()) {
     inGame = 0;
-    loopStatus = loopMenu;
     delay(200);
+    return 1;
   }
+  else
+    return 0;
 }
 

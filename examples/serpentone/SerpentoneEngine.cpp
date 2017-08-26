@@ -1,6 +1,3 @@
-// copyright (c) 2017 Roberto Ceccarelli - CasaSoft
-// http://strawberryfield.altervista.org 
-// 
 // This file is part of CasaSoft Arduino Games
 // 
 // CasaSoft Arduino Games is free software: 
@@ -18,35 +15,28 @@
 // along with CasaSoft Arduino Games.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GAMEENGINE_H
-#define GAMEENGINE_H
+#include "SerpentoneEngine.h"
 
-#include <openGLCD.h>
-#include <gameportlib.h>
-#include <fonts/System5x7.h>
-#include "GameUtils.h"
-#include "GameStringInput.h"
-#include "GameMenu.h"
-#include "GameHallOfFame.h"
-
-class GameEngine 
+void SerpentoneEngine::gameStart()
 {
-  public:
-    void Init(char title[]);
-    void Splash(Image_t bitmap, int timeout=2000);
-    void Loop();
+  if(inGame)
+    return;
 
-  protected:
-    GameMenu  MENU;
-    GameHallOfFame HALL;
-    
-    enum loopStates {loopMenu, loopGame, loopHall, loopName};
-    
-    loopStates loopStatus;
-    bool inGame;
-    
-    virtual void gameStart();
-    virtual int gameRun();
-};
-    
-#endif
+  inGame = 1;
+  GLCD.ClearScreen();
+  GLCD.GotoXY(0, 28);
+  GLCD.Puts_P(PSTR("Not yet implemented!"));
+  delay(200);
+}
+
+int SerpentoneEngine::gameRun()
+{
+  if(GU.anyButton()) {
+    GameEngine::inGame = 0;
+    delay(200);
+    return 1;
+  }
+  else
+    return 0;
+}
+
