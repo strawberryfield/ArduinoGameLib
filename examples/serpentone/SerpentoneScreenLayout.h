@@ -18,18 +18,22 @@
 // along with CasaSoft Arduino Games.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-#include "SerpentoneEngine.h"
-#include <bitmaps/ArduinoGames.h>
+#ifndef SERPENTONESCREENLAYOUT_H
+#define SERPENTONESCREENLAYOUT_H
 
-SerpentoneEngine GE;
+const char string_0[] PROGMEM =  "@@@@@@@@@@@@@@@@@@@@@";
+const char string_1[] PROGMEM =  "@ABBBBA@ABBBBBBBBBBA@";
+const char string_2[] PROGMEM =  "@@@@@@C@@@@@@@@@@@@C@";
+const char string_3[] PROGMEM =  "@A@A@@A@@@@@@@@@@@@C@";
+const char string_4[] PROGMEM =  "@C@C@@@@@@@@@@@@@@@C@";
+const char string_5[] PROGMEM =  "@C@A@@@@@@@@@@@@@@@C@";
+const char string_6[] PROGMEM =  "@C@@@@@@@@@@@@@@@@@C@";
+const char string_7[] PROGMEM =  "@C@@@@@@@@@@@@@@@@@C@";
+const char string_8[] PROGMEM =  "@ABBBBBBBBBBBBBBBBBA@";
+const char string_9[] PROGMEM =  "@@@@@@@@@@@@@@@@@@@@@";
 
-void setup() {
-  // put your setup code here, to run once:
-  GE.Init("Serpentone", screenLayout);
-  GE.Splash(ArduinoGames, 2000); 
-}
+const char* const screenLayout[] PROGMEM  = {
+  string_0, string_1, string_2, string_3, string_4, string_5, string_6, string_7, string_8, string_9
+  };
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  GE.Loop();
-}
+#endif

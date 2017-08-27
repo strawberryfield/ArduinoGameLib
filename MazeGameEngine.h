@@ -18,18 +18,31 @@
 // along with CasaSoft Arduino Games.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-#include "SerpentoneEngine.h"
-#include <bitmaps/ArduinoGames.h>
+#ifndef MAZEGAMEENGINE_H
+#define MAZEGAMEENGINE_H
 
-SerpentoneEngine GE;
+#include <avr/pgmspace.h>
+#include <openGLCD.h>
+#include <gameportlib.h>
+#include <fonts/System5x7.h>
+#include "GameUtils.h"
+#include "GameHallOfFame.h"
+#include "GameEngine.h"
+#include "fonts/SerpentoneFont.h"
 
-void setup() {
-  // put your setup code here, to run once:
-  GE.Init("Serpentone", screenLayout);
-  GE.Splash(ArduinoGames, 2000); 
-}
+#define SCREEN_ROWS 10
+#define SCREEN_COLS 21
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  GE.Loop();
-}
+class MazeGameEngine : public GameEngine
+{
+  public:
+    using GameEngine::GameEngine;
+    void Init(char title[], char* layout[]);
+
+  protected:	
+    char screenGrid[SCREEN_ROWS][SCREEN_COLS];
+    void refreshAllScreen();
+    void initScreenGrid(char* layout[]);
+};
+    
+#endif

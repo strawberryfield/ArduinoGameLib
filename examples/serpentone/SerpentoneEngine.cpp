@@ -23,9 +23,7 @@ void SerpentoneEngine::gameStart()
     return;
 
   inGame = 1;
-  GLCD.ClearScreen();
-  GLCD.GotoXY(0, 28);
-  GLCD.Puts_P(PSTR("Not yet implemented!"));
+  refreshAllScreen();
   delay(200);
 }
 

@@ -21,18 +21,14 @@
 #ifndef SERPENTONEENGINE_H
 #define SERPENTONEENGINE_H
 
-#include <openGLCD.h>
-#include <gameportlib.h>
-#include <fonts/System5x7.h>
-#include <GameUtils.h>
-#include <GameHallOfFame.h>
-#include <GameEngine.h>
+#include <MazeGameEngine.h>
+#include "SerpentoneScreenLayout.h"
 
-class SerpentoneEngine : public GameEngine
+class SerpentoneEngine : public MazeGameEngine
 {
   public:
-    using GameEngine::GameEngine;
-    
+    using MazeGameEngine::MazeGameEngine;
+
   protected:	
     virtual void gameStart();
     virtual int gameRun();

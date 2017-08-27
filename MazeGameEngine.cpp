@@ -1,6 +1,3 @@
-// copyright (c) 2017 Roberto Ceccarelli - CasaSoft
-// http://strawberryfield.altervista.org 
-// 
 // This file is part of CasaSoft Arduino Games
 // 
 // CasaSoft Arduino Games is free software: 
@@ -18,18 +15,30 @@
 // along with CasaSoft Arduino Games.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-#include "SerpentoneEngine.h"
-#include <bitmaps/ArduinoGames.h>
+#include "MazeGameEngine.h"
 
-SerpentoneEngine GE;
-
-void setup() {
-  // put your setup code here, to run once:
-  GE.Init("Serpentone", screenLayout);
-  GE.Splash(ArduinoGames, 2000); 
+void MazeGameEngine::Init(char title[], char* layout[])
+{
+  initScreenGrid(layout);
+  GameEngine::Init(title);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  GE.Loop();
+
+void MazeGameEngine::refreshAllScreen()
+{
+  GLCD.ClearScreen();
+  GLCD.SelectFont(SerpentoneFont);
+  for(int x=0; x < SCREEN_COLS; x++)
+    for(int y=0; y < SCREEN_ROWS; y++) {
+      GLCD.GotoXY(x*6+1, y*6+2);
+      GLCD.PutChar(screenGrid[y][x]);
+    }
+    GLCD.DrawRect(0, 0, GLCD.Width, GLCD.Height);    
+}
+
+void MazeGameEngine::initScreenGrid(char* layout[])
+{
+  for(int y=0; y<SCREEN_ROWS; y++) {
+    strncpy_P(screenGrid[y], (char*)pgm_read_word(&(layout[y])), SCREEN_COLS);  
+  }
 }
