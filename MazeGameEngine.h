@@ -37,12 +37,34 @@ class MazeGameEngine : public GameEngine
 {
   public:
     using GameEngine::GameEngine;
-    void Init(char title[], char* layout[]);
 
-  protected:	
+  protected:
+	enum directions {dirRight, dirDown, dirLeft, dirUp};
+
+	class Position
+	{
+	  public:
+		int x;
+		int y;
+		bool Valid();
+		Position Next(directions dir);
+	};
+	
+    class Sprite
+	{
+      public:		
+		Position p;
+		directions lastDir;
+	    void Move(directions dir);
+	    void Move();
+	};
+	
     char screenGrid[SCREEN_ROWS][SCREEN_COLS];
     void refreshAllScreen();
     void initScreenGrid(char* layout[]);
+
+	void Display(Position p, char c);
+	char Read(Position p);
 };
     
 #endif

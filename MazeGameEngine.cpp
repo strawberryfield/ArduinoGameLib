@@ -17,23 +17,17 @@
 
 #include "MazeGameEngine.h"
 
-void MazeGameEngine::Init(char title[], char* layout[])
-{
-  initScreenGrid(layout);
-  GameEngine::Init(title);
-}
-
 
 void MazeGameEngine::refreshAllScreen()
 {
   GLCD.ClearScreen();
   GLCD.SelectFont(SerpentoneFont);
+  GLCD.DrawRect(0, 0, GLCD.Width, GLCD.Height);    
   for(int x=0; x < SCREEN_COLS; x++)
     for(int y=0; y < SCREEN_ROWS; y++) {
       GLCD.GotoXY(x*6+1, y*6+2);
       GLCD.PutChar(screenGrid[y][x]);
     }
-    GLCD.DrawRect(0, 0, GLCD.Width, GLCD.Height);    
 }
 
 void MazeGameEngine::initScreenGrid(char* layout[])
@@ -41,4 +35,59 @@ void MazeGameEngine::initScreenGrid(char* layout[])
   for(int y=0; y<SCREEN_ROWS; y++) {
     strncpy_P(screenGrid[y], (char*)pgm_read_word(&(layout[y])), SCREEN_COLS);  
   }
+}
+
+
+void MazeGameEngine::Display(MazeGameEngine::Position p, char c)
+{
+  GLCD.GotoXY(p.x * 6 +1, p.y *6 +2);
+  GLCD.PutChar(c);
+  screenGrid[p.y][p.x] = c;
+}
+
+bool MazeGameEngine::Position::Valid()
+{
+  return x >= 0 && x < SCREEN_COLS && y >= 0 && y < SCREEN_ROWS;
+}
+
+MazeGameEngine::Position MazeGameEngine::Position::Next(MazeGameEngine::directions dir)
+{
+  Position ret;
+  ret.x = x;
+  ret.y = y;  
+  switch(dir) {
+	case dirRight:
+	  ret.x++;
+	  break;
+	case dirLeft:
+	  ret.x--;
+	  break;
+	case dirDown:
+	  ret.y++;
+	  break;
+	case dirUp:
+	  ret.y--;
+	  break;
+  }
+  return ret;
+}
+
+void MazeGameEngine::Sprite::Move(MazeGameEngine::directions dir)
+{
+  p = p.Next(dir);
+  lastDir = dir;
+}
+
+void MazeGameEngine::Sprite::Move()
+{
+  MazeGameEngine::Sprite::Move(lastDir);
+}
+
+
+char MazeGameEngine::Read(MazeGameEngine::Position p)
+{
+  if(p.Valid())	
+    return screenGrid[p.y][p.x];	
+  else
+	return 0;
 }

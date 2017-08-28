@@ -25,7 +25,7 @@ SerpentoneEngine GE;
 
 void setup() {
   // put your setup code here, to run once:
-  GE.Init("Serpentone", screenLayout);
+  GE.Init("Serpentone");
   GE.Splash(ArduinoGames, 2000); 
 }
 

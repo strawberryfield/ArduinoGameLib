@@ -19,7 +19,7 @@
 #define SERPENTONEFONT_H
 
 GLCDFONTDECL(SerpentoneFont) = {
-    0x0, 0x0,	// size of zero indicates fixed width font
+    0x0, 0x1, // size of one indicates fixed width no pixel pad font
     6,		// width
     6,		// height
     '@',	// first char (64)
