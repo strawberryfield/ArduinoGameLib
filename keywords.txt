@@ -41,3 +41,16 @@ getFromEEPROM	KEYWORD2
 GameUtils	KEYWORD1
 showHeader	KEYWORD2
 anyButton	KEYWORD2
+
+MazeGameEngine	KEYWORD1
+refreshAllScreen	KEYWORD2
+initScreenGrid	KEYWORD2
+Read	KEYWORD2
+Display	KEYWORD2
+
+Position	KEYWORD1
+Valid	KEYWORD2
+Next	KEYWORD2
+
+Sprite	KEYWORD1
+Move	KEYWORD2

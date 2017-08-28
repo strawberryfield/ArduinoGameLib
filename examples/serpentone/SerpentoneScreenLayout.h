@@ -22,14 +22,14 @@
 #define SERPENTONESCREENLAYOUT_H
 
 const char string_0[] PROGMEM =  "@@@@@@@@@@@@@@@@@@@@@";
-const char string_1[] PROGMEM =  "@ABBBBA@ABBBBBBBBBBA@";
-const char string_2[] PROGMEM =  "@@@@@@C@@@@@@@@@@@@C@";
-const char string_3[] PROGMEM =  "@A@A@@A@@@@@@@@@@@@C@";
+const char string_1[] PROGMEM =  "@OBBBJ@ABBBBBBBBBBBJ@";
+const char string_2[] PROGMEM =  "@@@@@C@@@@@@@@@@@@@C@";
+const char string_3[] PROGMEM =  "@M@M@L@@@@@@@@@@@@@C@";
 const char string_4[] PROGMEM =  "@C@C@@@@@@@@@@@@@@@C@";
-const char string_5[] PROGMEM =  "@C@A@@@@@@@@@@@@@@@C@";
-const char string_6[] PROGMEM =  "@C@@@@@@@@@@@@@@@@@C@";
+const char string_5[] PROGMEM =  "@C@GN@@@@@@@@@@@@@@C@";
+const char string_6[] PROGMEM =  "@C@L@@@@@@@@@@@@@@@C@";
 const char string_7[] PROGMEM =  "@C@@@@@@@@@@@@@@@@@C@";
-const char string_8[] PROGMEM =  "@ABBBBBBBBBBBBBBBBBA@";
+const char string_8[] PROGMEM =  "@IN@OBBBBBBBBBBBBBBH@";
 const char string_9[] PROGMEM =  "@@@@@@@@@@@@@@@@@@@@@";
 
 const char* const screenLayout[] PROGMEM  = {

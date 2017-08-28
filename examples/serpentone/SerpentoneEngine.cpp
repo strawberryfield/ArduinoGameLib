@@ -59,6 +59,31 @@ int SerpentoneEngine::gameRun()
 
 int SerpentoneEngine::moveHead()
 {
+  int d = GP.ReadDigital(X1);
+  if(d != DIRECTION_NONE) {
+    if( d == DIRECTION_LEFT) {
+      if(Read(head.p.Next(dirLeft)) == '@')
+        head.lastDir = dirLeft;
+    }
+    else {
+      if(Read(head.p.Next(dirRight)) == '@')
+        head.lastDir = dirRight;      
+    }
+  }
+
+  d = GP.ReadDigital(Y1);
+  if(d != DIRECTION_NONE) {
+    if( d == DIRECTION_UP) {
+      if(Read(head.p.Next(dirUp)) == '@')
+        head.lastDir = dirUp;
+    }
+    else {
+      if(Read(head.p.Next(dirDown)) == '@')
+        head.lastDir = dirDown;      
+    }
+  }
+
+  
   if(Read(head.p.Next(head.lastDir)) != '@') {
     if(head.lastDir == dirLeft || head.lastDir == dirRight) {
       if(Read(head.p.Next(dirDown)) == '@')
