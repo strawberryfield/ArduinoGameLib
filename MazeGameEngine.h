@@ -39,6 +39,9 @@ class MazeGameEngine : public GameEngine
     using GameEngine::GameEngine;
 
   protected:
+	int stageLevel;
+	enum gameStates {gameInitStage, gamePlay, gameEndStage, gameOver};
+	gameStates gameStatus;
 	enum directions {dirRight, dirDown, dirLeft, dirUp};
 
 	class Position

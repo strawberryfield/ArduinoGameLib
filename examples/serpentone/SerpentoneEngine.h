@@ -29,13 +29,14 @@ class SerpentoneEngine : public MazeGameEngine
   public:
     using MazeGameEngine::MazeGameEngine;
 
-  protected:
+  private:
     Sprite head;
     Sprite tail;	
     virtual void gameStart();
     virtual int gameRun();
     int moveHead();
     void moveTail();
+    void initStage();
 };
     
 #endif

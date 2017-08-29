@@ -27,7 +27,7 @@ void GameMenu::menuDisplay()
   if(menuStatus != menuNone)
     return;
     
-  GU.showHeader(GU.Title);  
+  GU.showHeader();  
   menuIconSelected(0);
   GLCD.GotoXY(MENU_TEXT_LEFT, MENU_ICON_TOP+1);
   GLCD.Puts_P(PSTR("Start Game"));

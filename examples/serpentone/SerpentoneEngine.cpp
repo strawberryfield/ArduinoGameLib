@@ -23,6 +23,41 @@ void SerpentoneEngine::gameStart()
     return;
 
   inGame = 1;
+  gameStatus = gameInitStage;
+  delay(200);
+}
+
+int SerpentoneEngine::gameRun()
+{
+  switch(gameStatus) {
+    case gameInitStage:
+      initStage();
+      gameStatus = gamePlay;
+      break;
+
+    case gamePlay:
+      moveHead();
+      moveTail();
+      delay(100);
+      
+      if(GU.anyButton()) 
+        gameStatus = gameOver;
+      break;  
+
+    case gameOver:
+      GU.showHeader();
+      GLCD.GotoXY(36,30);
+      GLCD.Puts_P(PSTR("GAME OVER"));
+      GameEngine::inGame = 0; 
+      delay(2000);
+      return 1;
+      break;
+  }
+  return 0;
+}
+
+void SerpentoneEngine::initStage()
+{
   initScreenGrid(screenLayout);
   refreshAllScreen();
 
@@ -37,24 +72,7 @@ void SerpentoneEngine::gameStart()
   Display(tail.p, 'R');
 
   for(int i=0; i<5; i++)
-    moveHead();
-  delay(200);
-}
-
-int SerpentoneEngine::gameRun()
-{
-  moveHead();
-  moveTail();
-  delay(100);
-  
-  if(GU.anyButton()) {
-    GameEngine::inGame = 0;
-
-    delay(200);
-    return 1;
-  }
-  else
-    return 0;
+    moveHead();  
 }
 
 int SerpentoneEngine::moveHead()

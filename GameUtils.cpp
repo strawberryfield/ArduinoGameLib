@@ -43,6 +43,11 @@ void GameUtils::showHeader(PGM_P text)
   GLCD.DrawHLine(0, 9, GLCD.Width);  
 }
 
+void GameUtils::showHeader()
+{
+  showHeader(Title);  
+}
+
 bool GameUtils::anyButton()
 {
   return !GP.ReadButton(0) || !GP.ReadButton(1) || !GP.ReadButton(2) || !GP.ReadButton(3);

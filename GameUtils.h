@@ -33,6 +33,7 @@ class GameUtils
     void Splash(Image_t bitmap, int timeout);
     void showHeader(char text[]);
     void showHeader(PGM_P text);
+	void showHeader();
     bool anyButton();  
 
 };
