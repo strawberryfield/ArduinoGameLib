@@ -23,6 +23,10 @@
 
 #include <MazeGameEngine.h>
 #include "SerpentoneScreenLayout.h"
+#include <GameMusic.h>
+
+#define EMPTY_CELL '@'
+#define BONUS_CELL 'S'
 
 class SerpentoneEngine : public MazeGameEngine
 {
@@ -32,11 +36,13 @@ class SerpentoneEngine : public MazeGameEngine
   private:
     Sprite head;
     Sprite tail;	
-    virtual void gameStart();
+    GameMusic song;
     virtual int gameRun();
     int moveHead();
     void moveTail();
     void initStage();
+    bool testHead(directions dir);
+    bool testHead();
 };
     
 #endif

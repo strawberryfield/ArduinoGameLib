@@ -1,6 +1,3 @@
-// copyright (c) 2017 Roberto Ceccarelli - CasaSoft
-// http://strawberryfield.altervista.org 
-// 
 // This file is part of CasaSoft Arduino Games
 // 
 // CasaSoft Arduino Games is free software: 
@@ -18,26 +15,24 @@
 // along with CasaSoft Arduino Games.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GAMEUTILS_H
-#define GAMEUTILS_H
+#include "GameMusic.h"
 
-#include <openGLCD.h>
-#include <gameportlib.h>
-#include <fonts/System5x7.h>
-
-class GameUtils 
+void GameMusic::Play()
 {
-  public:
-    char Title[20];
+  // iterate over the notes of the melody:
+  for (int thisNote = 0; thisNote < size; thisNote++) {
 
-    void Splash(Image_t bitmap, int timeout);
-    void showHeader(char text[]);
-    void showHeader(PGM_P text);
-	void showHeader();
-    bool anyButton();  
-};
+    // to calculate the note duration, take one second
+    // divided by the note type.
+    //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
+    int noteDuration = 1000 / noteDurations[thisNote];
+    tone(TONE_PIN, melody[thisNote], noteDuration);
 
-extern GameUtils GU;
-extern GamePortLib GP;
-
-#endif
+    // to distinguish the notes, set a minimum time between them.
+    // the note's duration + 30% seems to work well:
+    int pauseBetweenNotes = noteDuration * 1.30;
+    delay(pauseBetweenNotes);
+    // stop the tone playing:
+    noTone(TONE_PIN);
+  }
+}

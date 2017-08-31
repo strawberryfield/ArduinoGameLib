@@ -17,6 +17,16 @@
 
 #include "MazeGameEngine.h"
 
+void MazeGameEngine::gameStart()
+{
+  if(inGame)
+    return;
+
+  inGame = 1;
+  stageLevel = 1;
+  gameStatus = gameInitStage;
+  delay(200);
+}
 
 void MazeGameEngine::refreshAllScreen()
 {
@@ -40,9 +50,14 @@ void MazeGameEngine::initScreenGrid(char* layout[])
 
 void MazeGameEngine::Display(MazeGameEngine::Position p, char c)
 {
-  GLCD.GotoXY(p.x * 6 +1, p.y *6 +2);
+  Display(p.x, p.y, c);
+}
+
+void MazeGameEngine::Display(int x, int y, char c)
+{
+  GLCD.GotoXY(x * 6 +1, y *6 +2);
   GLCD.PutChar(c);
-  screenGrid[p.y][p.x] = c;
+  screenGrid[y][x] = c;
 }
 
 bool MazeGameEngine::Position::Valid()

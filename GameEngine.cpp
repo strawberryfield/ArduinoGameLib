@@ -19,6 +19,7 @@
 
 void GameEngine::Init(char title[])
 {
+  randomSeed(analogRead(5));	
   strcpy(GU.Title, title);
   GLCD.Init();
   GLCD.ClearScreen(); 

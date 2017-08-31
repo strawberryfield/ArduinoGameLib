@@ -61,12 +61,14 @@ class MazeGameEngine : public GameEngine
 	    void Move(directions dir);
 	    void Move();
 	};
-	
+
+    virtual void gameStart();	
     char screenGrid[SCREEN_ROWS][SCREEN_COLS];
     void refreshAllScreen();
     void initScreenGrid(char* layout[]);
 
 	void Display(Position p, char c);
+	void Display(int x, int y, char c);
 	char Read(Position p);
 };
     

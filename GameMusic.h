@@ -18,26 +18,23 @@
 // along with CasaSoft Arduino Games.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GAMEUTILS_H
-#define GAMEUTILS_H
+#ifndef GAMEMUSIC_H
+#define GAMEMUSIC_H
 
-#include <openGLCD.h>
-#include <gameportlib.h>
-#include <fonts/System5x7.h>
+#include <Arduino.h>
+#include "pitches.h"
 
-class GameUtils 
+#define TONE_PIN	2
+
+class GameMusic 
 {
   public:
-    char Title[20];
-
-    void Splash(Image_t bitmap, int timeout);
-    void showHeader(char text[]);
-    void showHeader(PGM_P text);
-	void showHeader();
-    bool anyButton();  
+    int size = 8;
+	int melody[8] = { NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4};
+	// note durations: 4 = quarter note, 8 = eighth note, etc.:
+	int noteDurations[8] = {  4, 8, 8, 4, 4, 4, 4, 4};
+	
+    void Play();  
 };
-
-extern GameUtils GU;
-extern GamePortLib GP;
 
 #endif

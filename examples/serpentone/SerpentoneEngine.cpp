@@ -17,16 +17,6 @@
 
 #include "SerpentoneEngine.h"
 
-void SerpentoneEngine::gameStart()
-{
-  if(inGame)
-    return;
-
-  inGame = 1;
-  gameStatus = gameInitStage;
-  delay(200);
-}
-
 int SerpentoneEngine::gameRun()
 {
   switch(gameStatus) {
@@ -73,58 +63,81 @@ void SerpentoneEngine::initStage()
 
   for(int i=0; i<5; i++)
     moveHead();  
+
+  for(int i=0; i<(5+2*stageLevel); i++) {
+    int pos;
+    int r;
+    int c;
+    do {
+      pos = random(SCREEN_COLS*SCREEN_ROWS);
+      r = pos / SCREEN_COLS;
+      c = pos % SCREEN_COLS;      
+    } while(screenGrid[r][c] != EMPTY_CELL);
+    Display(c, r, BONUS_CELL);
+  }
+
+  song.Play();
 }
 
 int SerpentoneEngine::moveHead()
 {
+  char cell;
+  int ret = 0;
+  
   int d = GP.ReadDigital(X1);
   if(d != DIRECTION_NONE) {
     if( d == DIRECTION_LEFT) {
-      if(Read(head.p.Next(dirLeft)) == '@')
-        head.lastDir = dirLeft;
+      testHead(dirLeft);
     }
     else {
-      if(Read(head.p.Next(dirRight)) == '@')
-        head.lastDir = dirRight;      
+      testHead(dirRight);      
     }
   }
 
   d = GP.ReadDigital(Y1);
   if(d != DIRECTION_NONE) {
     if( d == DIRECTION_UP) {
-      if(Read(head.p.Next(dirUp)) == '@')
-        head.lastDir = dirUp;
+      testHead(dirUp);
     }
     else {
-      if(Read(head.p.Next(dirDown)) == '@')
-        head.lastDir = dirDown;      
+      testHead(dirDown);      
     }
   }
 
   
-  if(Read(head.p.Next(head.lastDir)) != '@') {
+  if(!testHead()) {
     if(head.lastDir == dirLeft || head.lastDir == dirRight) {
-      if(Read(head.p.Next(dirDown)) == '@')
-        head.lastDir = dirDown;
-      else if(Read(head.p.Next(dirUp)) == '@')
-        head.lastDir = dirUp;
-      else
-        return -1;
+      if(!testHead(dirDown))
+        if(!testHead(dirUp))
+          return -1;
     }
     else {
-      if(Read(head.p.Next(dirRight)) == '@')
-        head.lastDir = dirRight;
-      else if(Read(head.p.Next(dirLeft)) == '@')
-        head.lastDir = dirLeft;
-      else
-        return -1;      
+      if(!testHead(dirLeft))
+        if(!testHead(dirRight))
+          return -1;
     }
   }
 
   Display(head.p, 'R');
   head.Move();
   Display(head.p, 'Q');
-  return 0;
+  return ret;
+}
+
+bool SerpentoneEngine::testHead(MazeGameEngine::directions dir) 
+{
+  char r = Read(head.p.Next(dir));
+  if(r == EMPTY_CELL || r == BONUS_CELL) {
+    head.lastDir = dir;
+    return 1;
+  }
+  else
+    return 0;
+}
+
+bool SerpentoneEngine::testHead() 
+{
+  return testHead(head.lastDir);
 }
 
 void SerpentoneEngine::moveTail()
